@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="google-signin-client_id" content="381676572179-isj5rcvt7m8kimkni4urle7980mthrta.apps.googleusercontent.com">
+    <title>Under The Cover</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <!-- React scripts -->
+    <script src="https://unpkg.com/react@15.3.0/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.0/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://unpkg.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+    <!-- Google sign in -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  </head>
+  <body>
+    <div class="center_signin">
+        <div class="center_signin_inner">
+            <h1 style="color:#B30000">Under The Cover</h1>
+            <img src="http://orig10.deviantart.net/fab1/f/2015/063/9/1/open_book_with_ribbon_marker_by_superawesomevectors-d8kdh5i.jpg" alt="Under The Cover" height="283" width="400"/>
+            <div id="signin_button" class="g-signin2" data-onsuccess="onSignIn"></div>
+        </div>
+    </div>
+
+    <!-- Render React content -->
+    <div id="content"></div>
+    <a id="signout_button" href="#" onclick="signOut();" style="display:none; text-align:center">Sign Out</a>
+    <script type="text/javascript">
+	// Google signin
+	function onSignIn(googleUser) {
+		var profile = googleUser.getBasicProfile();
+		console.log('ID: ' + profile.getId());
+		console.log('Name: ' + profile.getName());
+		document.getElementById("signin_button").style.display = "none";
+		document.getElementById("signout_button").style.display = "block";
+	}
+	// Sign out
+	function signOut() {
+		var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut().then(function () {
+			console.log('User signed out.');
+			document.getElementById("signout_button").style.display = "none";
+			document.getElementById("signin_button").style.display = "block";
+		});
+	}
+    </script>
+    <script type="text/babel" src="scripts/book.js"></script>
+  </body>
+</html>
